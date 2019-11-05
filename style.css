@@ -1,0 +1,49 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    background-color: #33525a;
+}
+
+#grid {
+    width: 100%;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    height: 4%;
+}
+
+.cell {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    width: 100%;
+    height: 100%;
+}
+
+#row_0 .cell {
+    border-top: none;
+}
+
+#lost {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(43, 43, 43, 0.77);
+    position: absolute;
+    top: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#lost h1 {
+    font-size: 50px;
+}
+
+#lost h1, #lost h2 {
+    font-family: Helvetica, sans-serif;
+    font-weight: 100;
+    color: #FFFFFF;
+    margin: 10px;
+}
