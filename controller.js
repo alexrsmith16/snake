@@ -13,26 +13,28 @@ windowLoop();
 
 document.onkeydown = function(event) {
 // console.log(event.key);
-    switch (event.key) {
-        case "ArrowUp":
-            event.preventDefault();
-            direction = "up";
-            break;
-        case "ArrowRight":
-            event.preventDefault();
-            direction = "right";
-            break;
-        case "ArrowDown":
-            event.preventDefault();
-            direction = "down";
-            break;
-        case "ArrowLeft":
-            event.preventDefault();
-            direction = "left";
-            break;
-        case " ":
-            pause ? pause = false : pause = true;
-            manageLoop();
-            break;
+    if (!lost) {
+        switch (event.key) {
+            case "ArrowUp":
+                event.preventDefault();
+                direction = "up";
+                break;
+            case "ArrowRight":
+                event.preventDefault();
+                direction = "right";
+                break;
+            case "ArrowDown":
+                event.preventDefault();
+                direction = "down";
+                break;
+            case "ArrowLeft":
+                event.preventDefault();
+                direction = "left";
+                break;
+            case " ":
+                pause ? pause = false : pause = true;
+                manageLoop();
+                break;
+        }
     }
 };
