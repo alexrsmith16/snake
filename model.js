@@ -4,9 +4,64 @@ let snake = [{x: 10, y: 10}, {x: 10, y:11}, {x: 10, y: 12}];
 let food = {x: 20, y: 10};
 let tail = {};
 let direction = "up";
-let speed = 4;
-let times = 10;
+let speed = 0;
+let times = [1, 2, 5, 10, 20, 40, 100];
 let score = 0;
+let loopInterval = 1000;
+let index = 0;
+let loop;
+let pause = false;
+let lost = false;
+
+function manageLoop() {
+    clearInterval(loop);
+    switch (speed) {
+        case 0:
+            loopInterval = 250;
+            break;
+        case 1:
+            loopInterval = 200;
+            break;
+        case 2:
+            loopInterval = 150;
+            break;
+        case 3:
+            loopInterval = 100;
+            break;
+        case 4:
+            loopInterval = 75;
+            break;
+        case 5:
+            loopInterval = 50;
+            break;
+        case 6:
+            loopInterval = 30;
+            break;
+        case 7:
+            loopInterval = 15;
+            break;
+    }
+    console.log(loopInterval);
+    loop = setInterval(gameLoop, loopInterval);
+}
+
+manageLoop();
+
+function gameLoop() {
+    // console.log(index++);
+    if (pause || lost) {
+        clearInterval(loop);
+    }
+    else {
+        go();
+    }
+}
+
+function go() {
+    moveSnake();
+    checkEat();
+    checkLose();
+}
 
 function moveSnake() {
     let holdx = snake[0].x;
@@ -66,13 +121,11 @@ function lostGame() {
 }
 
 function updateSpeed() {
-    if (speed > 1) {
-        if (times <= 0) {
-            speed -= 1;
-            times = 20;
-        }
-        else {
-            times -= 1;
-        }
+    if (times[speed] <= 0) {
+        speed += 1;
+        manageLoop();
+    }
+    else {
+        times[speed] -= 1;
     }
 }

@@ -1,40 +1,14 @@
 //user inputs
 //listeners
 let frames = 0;
-let pause = false;
-let lost = false;
-function gameLoop() {
-    console.log(frames);
-    if(speed > 1) {
-        if (frames % speed === 0) {
-            go();
-        }
-    }
-    else if(speed === 1) {
-        let interval = frames % 3;
-        switch (interval) {
-            case 0:
-                setTimeout(go, 5);
-                break;
-            case 1:
-                setTimeout(go, 11);
-                break;
-        }
-    }
-    else {
-        go();
-    }
+function windowLoop() {
+    // console.log(frames);
     write();
     ++frames;
-    if (!pause && !lost) window.requestAnimationFrame(gameLoop);
+    if (!pause || !lost) window.requestAnimationFrame(windowLoop);
 }
 
-gameLoop();
-function go() {
-    moveSnake();
-    checkEat();
-    checkLose();
-}
+windowLoop();
 
 
 document.onkeydown = function(event) {
@@ -58,7 +32,7 @@ document.onkeydown = function(event) {
             break;
         case " ":
             pause ? pause = false : pause = true;
-            gameLoop();
+            manageLoop();
             break;
     }
 };
